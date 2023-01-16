@@ -1,0 +1,64 @@
+﻿@model IEnumerable<AirsoftGroup.Models.Stats>
+
+@if (User.IsInRole("Admin"))
+{
+    <p>
+    <a asp-action="Add">Add New</a>
+</p>}
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.PlayerName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Win)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Defeat)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Accuracy)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.HeadshotPercentage)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FavouriteWeapon)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.PlayerName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Win)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Defeat)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Accuracy)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.HeadshotPercentage)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FavouriteWeapon)
+            </td>
+                @if (User.IsInRole("Admin"))
+                {
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.UserId">Edit</a> |
+                @*<a asp-action="Details" asp-route-id="@item.UserId">Details</a> |*@
+                <a asp-action="Delete" asp-route-id="@item.UserId">Delete</a>
+            </td>
+                }
+        </tr>
+}
+    </tbody>
+</table>

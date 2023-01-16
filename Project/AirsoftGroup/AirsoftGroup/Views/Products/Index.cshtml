@@ -1,0 +1,17 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+@model IEnumerable<Products>
+
+<div>
+    @Html.Partial("_ViewProducts", Model)
+</div>
+
+
+@if (User.IsInRole("Admin"))
+{
+<h1><a asp-action="Create">Create Products</a></h1>
+}
+
+@*<div class="container col-lg-3 col-md-4 col-sm-6 g-2 py-5">*@
+

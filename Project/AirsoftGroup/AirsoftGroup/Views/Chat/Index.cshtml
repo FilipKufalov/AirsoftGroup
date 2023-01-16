@@ -1,0 +1,42 @@
+﻿@using AirsoftGroup.Models.Entity
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+@model IEnumerable<Chat>
+
+@if (SignInManager.IsSignedIn(User))
+{
+    <h3>ChatBox</h3>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">User</th>
+                <th scope="col">Message</th>
+                <th scope="col">Time</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model != null)
+            {
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.user</td>
+                        <td>@item.message</td>
+                        <td>@item.messageCreated</td>
+                    </tr>
+                }
+            }
+            else
+            {
+            <td>No data</td>
+            <td>No data</td>
+            <td>No data</td>
+            }
+        </tbody>
+    </table>
+    <a asp-controller="Chat" asp-action="Submit"><button>Send Message</button></a>
+    @*<partial name="Submit"/>*@
+} else {
+    <h1>Sign in to send message!</h1>
+}

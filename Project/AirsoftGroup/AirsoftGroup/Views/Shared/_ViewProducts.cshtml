@@ -1,0 +1,33 @@
+﻿<h3>Some products</h3>
+<a asp-controller="Products" asp-action="Index"><button>Show more</button></a>
+<div class="row">
+    @foreach (var product in Model)
+    {
+        <div class="card">
+            <img class="card-img-top" src=@product.ProductImage alt="Product">
+            <div class="card-body">
+                @try
+                {
+                    <h4 class="card-title">@product.ProductName.Substring(0,60)</h4>
+                }
+                catch
+                {
+                    <h4 class="card-title">@product.ProductName</h4>
+                }
+                @try
+                {
+                    <p class="card-title">@product.Description.Substring(0,60)</p>
+                }
+                catch
+                {
+                    <p class="card-title">@product.Description</p>
+                }
+                @*<p class="card-text">@product.Description</p>*@
+                <button type="button" class="btn btn-outline-primary">Buy Now @product.Price$</button>
+            </div>
+            <div class="card-footer">
+                <small class="text-muted">Stock: @product.Quantity</small>
+            </div>
+        </div>
+    }
+</div>
